@@ -6,13 +6,15 @@ async function getTodayMoods() {
   const response = await fetch(`${baseUrl}/today`);
   const moods = await response.json();
 
-  moods.forEach((mood, index) => {
-    const sectionMoods = document.getElementById('moods');
+  const sectionMoods = document.getElementById('moods');
 
-    sectionMoods.insertAdjacentHTML(
-      'beforeend',
-      `<h3 class="titleDate"> ${mood.formattedDateTitle} </h3>`,
-    );
+  moods.forEach((mood, index) => {
+    if (index === 0) {
+      sectionMoods.insertAdjacentHTML(
+        'beforeend',
+        `<h3 class="titleDate"> ${mood.formattedDateTitle} </h3>`,
+      );
+    }
 
     sectionMoods.insertAdjacentHTML(
       'beforeend',
