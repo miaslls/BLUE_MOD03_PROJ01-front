@@ -2,23 +2,21 @@
 
 const baseUrl = 'http://localhost:3000/mood';
 
-async function findAllMoods() {
-  const response = await fetch(`${baseUrl}/all`);
+async function getTodayMoods() {
+  const response = await fetch(`${baseUrl}/today`);
   const moods = await response.json();
 
   moods.forEach((mood, index) => {
     const sectionMoods = document.getElementById('moods');
 
-    if (index === 0 || mood.formattedDateBody !== moods[index - 1].formattedDateBody) {
-      sectionMoods.insertAdjacentHTML(
-        'afterbegin',
-        `<h3 class="titleDate"> ${mood.formattedDateTitle} </h3>`,
-      );
-    }
+    sectionMoods.insertAdjacentHTML(
+      'beforeend',
+      `<h3 class="titleDate"> ${mood.formattedDateTitle} </h3>`,
+    );
 
     sectionMoods.insertAdjacentHTML(
       'beforeend',
-      `
+      `      
         <article class="moodContainer mood_${mood.mood_id} ">
 
             <div class="icon moodIcon">
@@ -44,4 +42,4 @@ async function findAllMoods() {
   });
 }
 
-findAllMoods();
+getTodayMoods();
