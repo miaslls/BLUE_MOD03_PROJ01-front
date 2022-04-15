@@ -2,14 +2,14 @@
 
 const baseUrl = 'https://miamood-api.herokuapp.com/mood';
 
-async function getAllMoods() {
-  const response = await fetch(`${baseUrl}/all`);
+async function getTodayMoods() {
+  const response = await fetch(`${baseUrl}/today`);
   const moods = await response.json();
 
-  moods.forEach((mood, index) => {
-    const sectionMoods = document.getElementById('moods');
+  const sectionMoods = document.getElementById('moods');
 
-    if (index === 0 || mood.formattedDateBody !== moods[index - 1].formattedDateBody) {
+  moods.forEach((mood, index) => {
+    if (index === 0) {
       sectionMoods.insertAdjacentHTML(
         'beforeend',
         `<h3 class="titleDate"> ${mood.formattedDateTitle} </h3>`,
@@ -18,7 +18,7 @@ async function getAllMoods() {
 
     sectionMoods.insertAdjacentHTML(
       'beforeend',
-      `
+      `      
         <article class="moodContainer mood_${mood.mood_id} ">
 
             <div class="icon moodIcon">
@@ -42,6 +42,7 @@ async function getAllMoods() {
       `,
     );
   });
+
   const moodOptions = document.getElementsByClassName('moodOptions');
   const moodContainer = document.getElementsByClassName('moodContainer');
 
@@ -58,4 +59,4 @@ async function getAllMoods() {
   }
 }
 
-getAllMoods();
+getTodayMoods();

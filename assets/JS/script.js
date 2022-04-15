@@ -1,47 +1,23 @@
 'use strict';
 
-const baseUrl = 'https://miamood-api.herokuapp.com/mood';
+const navHint = document.getElementById('navHint');
+const navIconList = document.getElementsByClassName('navIcon');
 
-async function getTodayMoods() {
-  const response = await fetch(`${baseUrl}/today`);
-  const moods = await response.json();
-
-  const sectionMoods = document.getElementById('moods');
-
-  moods.forEach((mood, index) => {
-    if (index === 0) {
-      sectionMoods.insertAdjacentHTML(
-        'beforeend',
-        `<h3 class="titleDate"> ${mood.formattedDateTitle} </h3>`,
-      );
+for (let icon of navIconList) {
+  icon.addEventListener('mouseenter', () => {
+    switch (icon.id) {
+      case 'latestMoods':
+        navHint.innerText = 'mood/TODAY';
+        break;
+      case 'allMoods':
+        navHint.innerText = 'mood/ALL';
+        break;
+      case 'newMood':
+        navHint.innerText = 'mood/NEW';
     }
+  });
 
-    sectionMoods.insertAdjacentHTML(
-      'beforeend',
-      `      
-        <article class="moodContainer mood_${mood.mood_id} ">
-
-            <div class="icon moodIcon">
-                ${mood.icon}
-            </div>
-
-            <div class="moodTimestamp">
-                <span class="date"> ${mood.formattedDateBody} </span> @ <span class="time"> ${mood.formattedTime} </span>
-            </div>
-
-            <div class="moodOptions">
-                <div class="icon updateIcon updateDeleteIcon"><a href="/"></a></div>
-                <div class="icon deleteIcon updateDeleteIcon"><a href="/"></a></div>
-            </div>
-
-            <div class="moodText">
-                ${mood.text}
-            </div>
-
-        </article>
-      `,
-    );
+  icon.addEventListener('mouseleave', () => {
+    navHint.innerText = '';
   });
 }
-
-getTodayMoods();
