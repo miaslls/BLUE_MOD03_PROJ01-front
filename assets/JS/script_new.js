@@ -177,5 +177,5 @@ async function addMood() {
 
   const newMood = await response.json();
 
-  window.location.replace('https://miaslls.github.io/BLUE_MOD03_PROJ01-front/');
+  window.location.assign('https://miaslls.github.io/BLUE_MOD03_PROJ01-front/');
 }
