@@ -1,5 +1,7 @@
 'use strict';
 
+const baseUrl = 'https://miamood-api.herokuapp.com/mood';
+
 const iconList = [
   '',
   '',
@@ -137,8 +139,6 @@ for (let customIcon of customIconList) {
 }
 
 // 📌📌📌🚨
-
-const baseUrl = 'http://localhost:3000/mood';
 
 async function addMood() {
   const mood_id = Number(document.getElementById('mood_idInput').value);

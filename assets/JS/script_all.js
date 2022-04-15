@@ -1,6 +1,6 @@
 'use strict';
 
-const baseUrl = 'http://localhost:3000/mood';
+const baseUrl = 'https://miamood-api.herokuapp.com/mood';
 
 async function getAllMoods() {
   const response = await fetch(`${baseUrl}/all`);
