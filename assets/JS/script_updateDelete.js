@@ -1,5 +1,5 @@
 async function deleteMood(createdat) {
-  const response = await fetch(`${baseUrl}/delete/${createdat}`, {
+  const response = await fetch(`${baseUrlAPI}/delete/${createdat}`, {
     method: 'delete',
     headers: {
       'Content-Type': 'application/json',

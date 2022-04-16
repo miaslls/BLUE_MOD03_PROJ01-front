@@ -1,24 +1,26 @@
 'use strict';
 
-const baseUrl = 'https://miamood-api.herokuapp.com/mood';
+const baseUrlAPI = 'https://miamood-api.herokuapp.com/mood';
+const baseUrlPage = 'https://miaslls.github.io/BLUE_MOD03_PROJ01-front';
 
 async function getTodayMoods() {
-  const response = await fetch(`${baseUrl}/today`);
+  const response = await fetch(`${baseUrlAPI}/today`);
   const moods = await response.json();
 
   const sectionMoods = document.getElementById('moods');
 
-  moods.forEach((mood, index) => {
-    if (index === 0) {
+  if (moods.length !== 0) {
+    moods.forEach((mood, index) => {
+      if (index === 0) {
+        sectionMoods.insertAdjacentHTML(
+          'beforeend',
+          `<h3 class="titleDate"> ${mood.formattedDateTitle} </h3>`,
+        );
+      }
+
       sectionMoods.insertAdjacentHTML(
         'beforeend',
-        `<h3 class="titleDate"> ${mood.formattedDateTitle} </h3>`,
-      );
-    }
-
-    sectionMoods.insertAdjacentHTML(
-      'beforeend',
-      `      
+        `      
         <article class="moodContainer mood_${mood.mood_id} ">
 
             <div class="icon moodIcon">
@@ -40,23 +42,41 @@ async function getTodayMoods() {
 
         </article>
       `,
+      );
+    });
+
+    const moodOptions = document.getElementsByClassName('moodOptions');
+    const moodContainer = document.getElementsByClassName('moodContainer');
+
+    for (let i = 0; i < moodContainer.length; i++) {
+      moodContainer[i].addEventListener('mouseenter', () => {
+        moodOptions[i].setAttribute('class', 'moodOptions visible');
+      });
+    }
+
+    for (let i = 0; i < moodContainer.length; i++) {
+      moodContainer[i].addEventListener('mouseleave', () => {
+        moodOptions[i].setAttribute('class', 'moodOptions');
+      });
+    }
+    // 📌
+  } else {
+    sectionMoods.insertAdjacentHTML(
+      'beforeend',
+      `
+  <h2>no<strong>MOOD</strong></h2>
+
+  <p>looks like you've been a lazy little piece of shit and didn't log any moods today, huh?</p>
+
+  <div id="noMoodBtns">
+
+    <span id="addBtn"><a href="${baseUrlPage}/all" target="_self">new<strong>MOOD</strong><span class="icon btnIcon" id="addIcon"></span></a></span>
+
+  </div>
+  `,
     );
-  });
-
-  const moodOptions = document.getElementsByClassName('moodOptions');
-  const moodContainer = document.getElementsByClassName('moodContainer');
-
-  for (let i = 0; i < moodContainer.length; i++) {
-    moodContainer[i].addEventListener('mouseenter', () => {
-      moodOptions[i].setAttribute('class', 'moodOptions visible');
-    });
   }
-
-  for (let i = 0; i < moodContainer.length; i++) {
-    moodContainer[i].addEventListener('mouseleave', () => {
-      moodOptions[i].setAttribute('class', 'moodOptions');
-    });
-  }
+  console.log(moods); // 🐞
 }
 
 getTodayMoods();
