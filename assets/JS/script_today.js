@@ -1,10 +1,7 @@
 'use strict';
 
-const baseUrlAPI = 'https://miamood-api.herokuapp.com/mood';
-const baseUrlPage = 'https://miaslls.github.io/BLUE_MOD03_PROJ01-front';
-
 async function getTodayMoods() {
-  const response = await fetch(`${baseUrlAPI}/today`);
+  const response = await fetch(`http://localhost:3000/mood/today`);
   const moods = await response.json();
 
   const sectionMoods = document.getElementById('moods');
@@ -33,7 +30,7 @@ async function getTodayMoods() {
 
             <div class="moodOptions">
                 <div class="icon updateIcon updateDeleteIcon"><a href="/"></a></div>
-                <div class="icon deleteIcon updateDeleteIcon"><a onclick="deleteMood(${mood.createdat})"></a></div>
+                <div class="icon deleteIcon updateDeleteIcon"><a onclick="confirmDeletion(${mood.createdat})"></a></div>
             </div>
 
             <div class="moodText">
@@ -70,13 +67,12 @@ async function getTodayMoods() {
 
   <div id="noMoodBtns">
 
-    <span id="addBtn"><a href="${baseUrlPage}/new" target="_self">new<strong>MOOD</strong><span class="icon btnIcon" id="addIcon"></span></a></span>
+    <span id="addBtn"><a href="/new.html" target="_self">new<strong>MOOD</strong><span class="icon btnIcon" id="addIcon"></span></a></span>
 
   </div>
   `,
     );
   }
-  console.log(moods); // 🐞
 }
 
 getTodayMoods();

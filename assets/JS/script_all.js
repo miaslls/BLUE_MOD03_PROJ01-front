@@ -1,9 +1,7 @@
 'use strict';
 
-const baseUrl = 'https://miamood-api.herokuapp.com/mood';
-
 async function getAllMoods() {
-  const response = await fetch(`${baseUrl}/all`);
+  const response = await fetch(`http://localhost:3000/mood/all`);
   const moods = await response.json();
 
   moods.forEach((mood, index) => {
@@ -31,7 +29,7 @@ async function getAllMoods() {
 
             <div class="moodOptions">
                 <div class="icon updateIcon updateDeleteIcon"><a href="/"></a></div>
-                <div class="icon deleteIcon updateDeleteIcon"><a onclick="deleteMood(${mood.createdat})"></a></div>
+                <div class="icon deleteIcon updateDeleteIcon"><a onclick="confirmDeletion(${mood.createdat})"></a></div>
             </div>
 
             <div class="moodText">

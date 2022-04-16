@@ -1,7 +1,5 @@
 'use strict';
 
-const baseUrl = 'https://miamood-api.herokuapp.com/mood';
-
 const iconList = [
   '',
   '',
@@ -166,7 +164,7 @@ async function addMood() {
     dateTime,
     createdat,
   };
-  const response = await fetch(baseUrl + '/add', {
+  const response = await fetch('http://localhost:3000/mood/add', {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',
@@ -177,5 +175,5 @@ async function addMood() {
 
   const newMood = await response.json();
 
-  window.location.assign('https://miaslls.github.io/BLUE_MOD03_PROJ01-front/');
+  window.location.assign('/');
 }
