@@ -70,7 +70,7 @@ async function getTodayMoods() {
 
   <div id="noMoodBtns">
 
-    <span id="addBtn"><a href="${baseUrlPage}/all" target="_self">new<strong>MOOD</strong><span class="icon btnIcon" id="addIcon"></span></a></span>
+    <span id="addBtn"><a href="${baseUrlPage}/new" target="_self">new<strong>MOOD</strong><span class="icon btnIcon" id="addIcon"></span></a></span>
 
   </div>
   `,
