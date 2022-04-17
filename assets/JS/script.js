@@ -1,5 +1,11 @@
 'use strict';
 
+const contentA = document.getElementById('contentA');
+const containerB = document.getElementById('containerB');
+const pageTitle = document.getElementById('pageTitle');
+
+// 📌 nav menu hover
+
 const navHint = document.getElementById('navHint');
 const navIconList = document.getElementsByClassName('navIcon');
 

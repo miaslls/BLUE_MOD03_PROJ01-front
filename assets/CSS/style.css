@@ -39,6 +39,10 @@ a {
     color: #24949c;
 }
 
+a:hover {
+    cursor: pointer;
+}
+
 .icon {
     font-family: 'Remix Icon';
 }

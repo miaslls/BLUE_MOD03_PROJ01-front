@@ -173,7 +173,7 @@ async function addMood() {
     body: JSON.stringify(mood),
   });
 
-  const newMood = await response.json();
+  const newMood = await response.json(); // 👁‍🗨
 
   window.location.assign('/');
 }

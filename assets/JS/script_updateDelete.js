@@ -1,35 +1,61 @@
 'use strict';
 
+async function performUpdates(createdat) {
+  const response = await fetch(`http://localhost:3000/mood/${createdat}`);
+  const mood = await response.json();
+
+  pageTitle.innerHTML = `<h2>mood/<span>UPDATE</span></h2>`;
+
+  contentA.innerHTML = `
+  <article class="updateDestroy moodContainer mood_${mood.mood_id}">
+
+    <div class="icon moodIcon">
+      ${mood.icon}
+    </div>
+
+    <div class="moodTimestamp">
+      <span class="date">
+          ${mood.formattedDateBody}
+      </span> @ <span class="time">
+          ${mood.formattedTime}
+      </span>
+    </div>
+
+    <div class="moodText">
+      ${mood.text}
+    </div>
+
+  </article>`;
+}
+
+// 📌 DELETE - confirm deletion
+
 async function confirmDeletion(createdat) {
   const response = await fetch(`http://localhost:3000/mood/${createdat}`);
   const mood = await response.json();
 
-  const contentA = document.getElementById('contentA');
-  const containerB = document.getElementById('containerB');
-  const pageTitle = document.getElementById('pageTitle');
-
   pageTitle.innerHTML = `<h2>mood/<span>DESTROY</span></h2>`;
 
   contentA.innerHTML = `
-    <article class="updateDestroy moodContainer mood_${mood.mood_id}">
+  <article class="updateDestroy moodContainer mood_${mood.mood_id}">
 
-      <div class="icon moodIcon">
-          ${mood.icon}
-      </div>
+    <div class="icon moodIcon">
+      ${mood.icon}
+    </div>
 
-      <div class="moodTimestamp">
-          <span class="date">
-              ${mood.formattedDateBody}
-          </span> @ <span class="time">
-              ${mood.formattedTime}
-          </span>
-      </div>
+    <div class="moodTimestamp">
+      <span class="date">
+          ${mood.formattedDateBody}
+      </span> @ <span class="time">
+          ${mood.formattedTime}
+      </span>
+    </div>
 
-      <div class="moodText">
-        ${mood.text}
-      </div>
+    <div class="moodText">
+      ${mood.text}
+    </div>
 
-    </article>
+  </article>
   `;
 
   containerB.innerHTML = `
@@ -41,17 +67,17 @@ async function confirmDeletion(createdat) {
 
     <div id="deleteBtns">
 
-        <span id="noBtn"><a onclick="window.location.reload()" target="_self"><span
-                    class="icon btnIcon" id="noIcon"></span>NOPE</a></span>
+        <span id="noBtn"><a onclick="window.location.reload()" target="_self"><span class="icon btnIcon" id="noIcon"></span>NOPE</a></span>
 
-        <span id="yesBtn"><a onclick="deleteMood(${mood.createdat})"><span
-                            class="icon btnIcon" id="yesIcon"></span><strong>YEET</strong>&nbsp;it</a></span>
+        <span id="yesBtn"><a onclick="deleteMood(${mood.createdat})"><span class="icon btnIcon" id="yesIcon"></span><strong>YEET</strong>&nbsp;it</a></span>
 
     </div>
 
-</section>
+  </section>
   `;
 }
+
+// 📌 DELETE - destroy
 
 async function deleteMood(createdat) {
   const response = await fetch(`http://localhost:3000/mood/delete/${createdat}`, {

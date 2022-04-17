@@ -1,14 +1,30 @@
 'use strict';
 
-async function getTodayMoods() {
-  const response = await fetch(`http://localhost:3000/mood/today`);
+// timerange: all OR today
+
+window.addEventListener('load', getTodayMoods());
+
+function getTodayMoods() {
+  getMoods('today');
+}
+
+function getAllMoods() {
+  getMoods('all');
+}
+
+async function getMoods(timerange) {
+  const response = await fetch(`http://localhost:3000/mood/${timerange}`);
   const moods = await response.json();
 
-  const sectionMoods = document.getElementById('moods');
+  pageTitle.innerHTML = `<h2>mood/<span>${timerange.toUpperCase()}</span></h2>`;
+
+  contentA.innerHTML = '<section id="moods"></section>';
 
   if (moods.length !== 0) {
     moods.forEach((mood, index) => {
-      if (index === 0) {
+      const sectionMoods = document.getElementById('moods');
+
+      if (index === 0 || mood.formattedDateBody !== moods[index - 1].formattedDateBody) {
         sectionMoods.insertAdjacentHTML(
           'beforeend',
           `<h3 class="titleDate"> ${mood.formattedDateTitle} </h3>`,
@@ -17,7 +33,7 @@ async function getTodayMoods() {
 
       sectionMoods.insertAdjacentHTML(
         'beforeend',
-        `      
+        `
         <article class="moodContainer mood_${mood.mood_id} ">
 
             <div class="icon moodIcon">
@@ -41,7 +57,6 @@ async function getTodayMoods() {
       `,
       );
     });
-
     const moodOptions = document.getElementsByClassName('moodOptions');
     const moodContainer = document.getElementsByClassName('moodContainer');
 
@@ -56,23 +71,20 @@ async function getTodayMoods() {
         moodOptions[i].setAttribute('class', 'moodOptions');
       });
     }
-    // 📌
   } else {
-    sectionMoods.insertAdjacentHTML(
+    document.getElementById('moods').insertAdjacentHTML(
       'beforeend',
       `
-  <h2>no<strong>MOOD</strong></h2>
-
-  <p>looks like you've been a lazy little piece of shit and didn't log any moods today, huh?</p>
-
-  <div id="noMoodBtns">
-
-    <span id="addBtn"><a href="/new.html" target="_self">new<strong>MOOD</strong><span class="icon btnIcon" id="addIcon"></span></a></span>
-
-  </div>
-  `,
+    <h2>no<strong>MOOD</strong></h2>
+  
+    <p>looks like you've been a lazy little piece of shit and didn't log any moods, huh?</p>
+  
+    <div id="noMoodBtns">
+  
+      <span id="addBtn"><a href="/new.html" target="_self">new<strong>MOOD</strong><span class="icon btnIcon" id="addIcon"></span></a></span>
+  
+    </div>
+    `,
     );
   }
 }
-
-getTodayMoods();
