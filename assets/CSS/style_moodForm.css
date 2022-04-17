@@ -72,7 +72,7 @@ input {
     border-bottom: #9B6CC4 1px dashed;
 }
 
-#addMoodBtn {
+#moodFormBtn {
     display: flex;
     align-items: center;
     align-self: flex-end;
@@ -92,7 +92,7 @@ input {
     cursor: pointer;
 }
 
-#addMoodBtn:hover {
+#moodFormBtn:hover {
     cursor: not-allowed;
 }
 

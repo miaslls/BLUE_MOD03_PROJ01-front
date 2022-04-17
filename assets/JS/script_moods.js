@@ -1,7 +1,5 @@
 'use strict';
 
-// timerange: all OR today
-
 window.addEventListener('load', getTodayMoods());
 
 function getTodayMoods() {
@@ -11,6 +9,34 @@ function getTodayMoods() {
 function getAllMoods() {
   getMoods('all');
 }
+
+// 📌❗ function showSingleMood usage:
+// CONTAINER.innerHTML = showSingleMood(mood);
+
+function showSingleMood(mood) {
+  return `
+  <article class="updateDestroy moodContainer mood_${mood.mood_id}">
+
+    <div class="icon moodIcon">
+      ${mood.icon}
+    </div>
+
+    <div class="moodTimestamp">
+      <span class="date">
+          ${mood.formattedDateBody}
+      </span> @ <span class="time">
+          ${mood.formattedTime}
+      </span>
+    </div>
+
+    <div class="moodText">
+      ${mood.text}
+    </div>
+
+  </article>`;
+}
+
+// 📌 timerange: all OR today
 
 async function getMoods(timerange) {
   const response = await fetch(`http://localhost:3000/mood/${timerange}`);
@@ -45,7 +71,7 @@ async function getMoods(timerange) {
             </div>
 
             <div class="moodOptions">
-                <div class="icon updateIcon updateDeleteIcon"><a href="/"></a></div>
+                <div class="icon updateIcon updateDeleteIcon"><a onclick="openUpdateMoodForm(${mood.createdat})"></a></div>
                 <div class="icon deleteIcon updateDeleteIcon"><a onclick="confirmDeletion(${mood.createdat})"></a></div>
             </div>
 
@@ -81,7 +107,7 @@ async function getMoods(timerange) {
   
     <div id="noMoodBtns">
   
-      <span id="addBtn"><a href="/new.html" target="_self">new<strong>MOOD</strong><span class="icon btnIcon" id="addIcon"></span></a></span>
+      <span id="addBtn"><a onclick="openNewMoodForm()">new<strong>MOOD</strong><span class="icon btnIcon" id="addIcon"></span></a></span>
   
     </div>
     `,

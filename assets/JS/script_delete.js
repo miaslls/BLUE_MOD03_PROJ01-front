@@ -1,33 +1,5 @@
 'use strict';
 
-async function performUpdates(createdat) {
-  const response = await fetch(`http://localhost:3000/mood/${createdat}`);
-  const mood = await response.json();
-
-  pageTitle.innerHTML = `<h2>mood/<span>UPDATE</span></h2>`;
-
-  contentA.innerHTML = `
-  <article class="updateDestroy moodContainer mood_${mood.mood_id}">
-
-    <div class="icon moodIcon">
-      ${mood.icon}
-    </div>
-
-    <div class="moodTimestamp">
-      <span class="date">
-          ${mood.formattedDateBody}
-      </span> @ <span class="time">
-          ${mood.formattedTime}
-      </span>
-    </div>
-
-    <div class="moodText">
-      ${mood.text}
-    </div>
-
-  </article>`;
-}
-
 // 📌 DELETE - confirm deletion
 
 async function confirmDeletion(createdat) {
@@ -36,27 +8,7 @@ async function confirmDeletion(createdat) {
 
   pageTitle.innerHTML = `<h2>mood/<span>DESTROY</span></h2>`;
 
-  contentA.innerHTML = `
-  <article class="updateDestroy moodContainer mood_${mood.mood_id}">
-
-    <div class="icon moodIcon">
-      ${mood.icon}
-    </div>
-
-    <div class="moodTimestamp">
-      <span class="date">
-          ${mood.formattedDateBody}
-      </span> @ <span class="time">
-          ${mood.formattedTime}
-      </span>
-    </div>
-
-    <div class="moodText">
-      ${mood.text}
-    </div>
-
-  </article>
-  `;
+  contentA.innerHTML = showSingleMood(mood);
 
   containerB.innerHTML = `
   <section id="deleteMood">
