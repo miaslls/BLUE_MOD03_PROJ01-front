@@ -57,7 +57,7 @@ a:hover {
 
 #message {
     width: fit-content;
-    padding: 0.25rem;
+    padding: 0.25rem 0.75rem 0.25rem 0.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
