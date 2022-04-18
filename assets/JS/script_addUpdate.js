@@ -46,9 +46,9 @@ async function addMood() {
     body: JSON.stringify(mood),
   });
 
-  const newMood = await response.json(); // 👁‍🗨 response.ok
+  const message = await response.json();
 
-  window.location.assign('/');
+  getTodayMoods(message);
 }
 
 async function updateMood(createdat) {
@@ -63,7 +63,7 @@ async function updateMood(createdat) {
     body: JSON.stringify(mood),
   });
 
-  const updated = await response.json(); // 👁‍🗨 response.ok
+  const message = await response.json();
 
-  window.location.assign('/');
+  getTodayMoods(message);
 }

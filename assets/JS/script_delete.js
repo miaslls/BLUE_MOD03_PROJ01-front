@@ -40,7 +40,7 @@ async function deleteMood(createdat) {
     mode: 'cors',
   });
 
-  const result = await response.json(); // 👁‍🗨
+  const message = await response.json();
 
-  window.location.reload();
+  getTodayMoods(message);
 }

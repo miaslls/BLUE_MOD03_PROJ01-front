@@ -2,8 +2,8 @@
 
 window.addEventListener('load', getTodayMoods());
 
-function getTodayMoods() {
-  getMoods('today');
+function getTodayMoods(message) {
+  getMoods('today', message);
 }
 
 function getAllMoods() {
@@ -33,14 +33,26 @@ function showSingleMood(mood) {
       ${mood.text}
     </div>
 
-  </article>`;
+  </article>
+  `;
 }
 
 // 📌 timerange: all OR today
 
-async function getMoods(timerange) {
+async function getMoods(timerange, message) {
   const response = await fetch(`http://localhost:3000/mood/${timerange}`);
   const moods = await response.json();
+
+  if (message) {
+    const messageContainer = document.getElementById('messageContainer');
+
+    messageContainer.innerHTML = `
+    <section id="message">
+      <span class="icon" id="messageIcon">${message.icon}</span>
+      <span id="messageText">${message.message}</span>
+    </section>
+    `;
+  }
 
   pageTitle.innerHTML = `<h2>mood/<span>${timerange.toUpperCase()}</span></h2>`;
 
@@ -113,4 +125,6 @@ async function getMoods(timerange) {
     `,
     );
   }
+
+  containerB.innerHTML = '';
 }
