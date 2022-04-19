@@ -1,5 +1,7 @@
 'use strict';
 
+// 📌 build form HTML
+
 function moodFormHTML(mood) {
   let formContainer;
 
@@ -90,7 +92,7 @@ function moodFormHTML(mood) {
   }
 }
 
-//📌
+//📌 form script
 
 function formScript(mood) {
   const iconList = [
@@ -157,12 +159,7 @@ function formScript(mood) {
   const iconWrapper = document.getElementById('iconWrapper');
 
   for (let icon of iconList) {
-    iconWrapper.insertAdjacentHTML(
-      'beforeend',
-      `
-          <div class="icon moodIcon custom">${icon}</div>
-          `,
-    );
+    iconWrapper.insertAdjacentHTML('beforeend', `<div class="icon moodIcon custom">${icon}</div>`);
   }
 
   const mood_idInput = document.getElementById('mood_idInput');
@@ -188,6 +185,8 @@ function formScript(mood) {
   const timeInput = document.getElementById('timeInput');
   const createdatInput = document.getElementById('createdatInput');
 
+  // 📌 NEW mood
+
   if (!mood) {
     const today = new Date();
 
@@ -207,6 +206,8 @@ function formScript(mood) {
 
     dateInput.value = date;
     timeInput.value = time;
+
+    // 📌 UPDATE mood
   } else {
     const textInput = document.getElementById('textInput');
 
